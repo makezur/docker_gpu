@@ -1,3 +1,6 @@
+#!/bin/bash
+
+
 NAME=kochka_gpu
 
 
