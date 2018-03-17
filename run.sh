@@ -15,4 +15,4 @@ $DOCKER_BINARY exec $DOCKER_NAME bash -c \
     "nohup jupyter notebook --ip 0.0.0.0 --port 8888 --no-browser --allow-root --NotebookApp.token= > /dev/null &"
 
 $DOCKER_BINARY exec $DOCKER_NAME bash -c \
-    "nohup tensorboard --logdir=./tensor_logs"
+    "nohup tensorboard --logdir=./tensor_logs &"
