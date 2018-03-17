@@ -67,7 +67,7 @@ RUN conda install \
         keras \
         pandas \
         scipy \
-    scikit-learn \
+        scikit-learn \
         seaborn \
         tqdm \
         scikit-image \
