@@ -10,8 +10,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         rsync \
         unzip \
         vim \
-    bzip2 \
-    ca-certificates \
+        bzip2 \
+        ca-certificates \
         cmake \
         git \
         wget \
