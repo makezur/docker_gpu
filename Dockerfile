@@ -72,6 +72,7 @@ RUN conda install \
         scikit-learn \
         seaborn \
         tqdm \
+        ffmpeg \
         scikit-image \
         beautifulsoup4 \
         tensorboard \
