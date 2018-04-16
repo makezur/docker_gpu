@@ -18,6 +18,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         curl \
         tmux \
         graphicsmagick \
+        ffmpeg \
+        xvfb \
         pkg-config \
         zip \
         zlib1g-dev \ 
@@ -72,8 +74,6 @@ RUN conda install \
         scikit-learn \
         seaborn \
         tqdm \
-        ffmpeg \
-        xvfb \
         scikit-image \
         beautifulsoup4 \
         tensorboard \
