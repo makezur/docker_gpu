@@ -20,6 +20,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         graphicsmagick \
         pkg-config \
         zip \
+        zlib1g-dev \ 
+        g++ \
         && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
@@ -81,6 +83,8 @@ RUN conda install \
 # Install gym
 
 RUN pip install gym
+RUN pip install gym[atari]
+
 
 # ------ Jupyter ------
 
