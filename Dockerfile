@@ -1,4 +1,4 @@
-FROM nvidia/9.0-devel-ubuntu16.04
+FROM nvidia/cuda:9.0-cudnn7-devel-ubuntu16.04
 
 # MAINTAINER Kirill Mazur <makezur@gmail.com>
 ARG opencv_version=3.4.1
