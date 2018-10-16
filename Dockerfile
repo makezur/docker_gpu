@@ -2,7 +2,7 @@ FROM nvidia/cuda:9.0-cudnn7-devel-ubuntu16.04
 
 # MAINTAINER Kirill Mazur <makezur@gmail.com>
 ARG opencv_version=3.4.1
-ARG tf_version=1.11
+ARG tf_version=1.9
 ARG torch_verion=1.0
 # ------ System packages ------
 
