@@ -43,6 +43,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         libx264-dev \
         pkg-config \
         libvtk5-dev \
+        x11-apps \\
         && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
@@ -149,6 +150,7 @@ EXPOSE 6006
 
 # Jupyter notebook
 EXPOSE 8888
+
 
 # WORKDIR 
 
