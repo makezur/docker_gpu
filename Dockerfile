@@ -1,11 +1,33 @@
-FROM nvidia/cuda:8.0-cudnn6-devel-ubuntu16.04
+FROM nvidia/9.0-devel-ubuntu16.04
 
-MAINTAINER Kirill Mazur <makezur@gmail.com>
-
+# MAINTAINER Kirill Mazur <makezur@gmail.com>
+ARG opencv_version=3.4.1
+ARG tf_version=1.11
+ARG torch_verion=1.0
 # ------ System packages ------
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
         build-essential \
+        cmake \
+        gfortran \
+        libatlas-base-dev \
+        libavcodec-dev \
+        libavformat-dev \
+        libavresample-dev \
+        libcanberra-gtk* \
+        libgtk2.0-dev \
+        libgtk-3-dev \
+        libjasper-dev \
+        libjpeg-dev \
+        libpng-dev \
+        libraspberrypi-dev \
+        libswscale-dev \
+        libtiff5-dev \
+        libv4l-dev \
+        libxvidcore-dev \
+        libx264-dev \
+        pkg-config \
+        libvtk5-dev \
         curl \
         rsync \
         unzip \
@@ -29,7 +51,28 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     rm -rf /var/lib/apt/lists/*
 
 
+WORKDIR /opt
+RUN wget -O opencv.zip https://github.com/opencv/opencv/archive/${opencv_version}.zip \
+    && unzip opencv.zip
+RUN wget -O opencv_contrib.zip https://github.com/opencv/opencv_contrib/archive/${opencv_version}.zip \
+    && unzip opencv_contrib.zip
 
+WORKDIR /opt/opencv-${opencv_version}/build
+RUN cmake -D CMAKE_BUILD_TYPE=RELEASE \
+    -D CMAKE_INSTALL_PREFIX=/usr/local \
+    -D OPENCV_EXTRA_MODULES_PATH=/opt/opencv_contrib-${opencv_version}/modules \
+    -D ENABLE_NEON=ON \
+    -D ENABLE_VFPV3=ON \
+    -D BUILD_TESTS=OFF \
+    -D WITH_VTK=ON \
+    -D INSTALL_PYTHON_EXAMPLES=OFF \
+    -D BUILD_EXAMPLES=OFF ..
+
+RUN make -j4 \
+    && make install \
+    && make clean
+
+WORKDIR /
 # ------- Conda -------
 
 RUN apt-get -qq update && apt-get -qq -y install curl bzip2 \
@@ -52,7 +95,7 @@ RUN conda install pytorch torchvision -c pytorch
 
 
 # Install TensorFlow (gpu version)
-RUN pip install tensorflow-gpu==1.4
+RUN pip install tensorflow-gpu==${tf_version}}
 
 # For CUDA profiling, TensorFlow requires CUPTI.
 ENV LD_LIBRARY_PATH /usr/local/cuda/extras/CUPTI/lib64:$LD_LIBRARY_PATH
@@ -84,8 +127,8 @@ RUN conda install \
 
 # Install gym
 
-RUN pip install gym
-RUN pip install gym[atari]
+# RUN pip install gym
+# RUN pip install gym[atari]
 
 
 # ------ Jupyter ------
@@ -110,6 +153,6 @@ EXPOSE 6006
 # Jupyter notebook
 EXPOSE 8888
 
-WORKDIR "/playground"
+# WORKDIR 
 
 CMD ["bash"]
