@@ -93,7 +93,7 @@ RUN conda install pytorch torchvision -c pytorch
 
 
 # Install TensorFlow (gpu version)
-RUN pip install tensorflow-gpu==${tf_version}}
+RUN pip install tensorflow-gpu==${tf_version}
 
 # For CUDA profiling, TensorFlow requires CUPTI.
 ENV LD_LIBRARY_PATH /usr/local/cuda/extras/CUPTI/lib64:$LD_LIBRARY_PATH
