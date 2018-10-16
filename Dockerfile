@@ -9,25 +9,6 @@ ARG torch_verion=1.0
 RUN apt-get update && apt-get install -y --no-install-recommends \
         build-essential \
         cmake \
-        gfortran \
-        libatlas-base-dev \
-        libavcodec-dev \
-        libavformat-dev \
-        libavresample-dev \
-        libcanberra-gtk* \
-        libgtk2.0-dev \
-        libgtk-3-dev \
-        libjasper-dev \
-        libjpeg-dev \
-        libpng-dev \
-        libraspberrypi-dev \
-        libswscale-dev \
-        libtiff5-dev \
-        libv4l-dev \
-        libxvidcore-dev \
-        libx264-dev \
-        pkg-config \
-        libvtk5-dev \
         curl \
         rsync \
         unzip \
@@ -46,6 +27,22 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         zip \
         zlib1g-dev \ 
         g++ \
+        libatlas-base-dev \
+        libavcodec-dev \
+        libavformat-dev \
+        libavresample-dev \
+        libgtk2.0-dev \
+        libgtk-3-dev \
+        libjasper-dev \
+        libjpeg-dev \
+        libpng-dev \
+        libswscale-dev \
+        libtiff5-dev \
+        libv4l-dev \
+        libxvidcore-dev \
+        libx264-dev \
+        pkg-config \
+        libvtk5-dev \
         && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
