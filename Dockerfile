@@ -110,14 +110,14 @@ RUN conda install \
         jupyter \
         matplotlib \
         numpy \
-        keras \
+        # keras \
         pandas \
         scipy \
         scikit-learn \
         seaborn \
         tqdm \
         scikit-image \
-        tensorboard \
+        # tensorboard \
         nbconvert \
         nltk \
         joblib
