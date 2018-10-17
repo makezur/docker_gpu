@@ -129,7 +129,6 @@ RUN conda install \
 # RUN pip install gym
 # RUN pip install gym[atari]
 
-
 # ------ Jupyter ------
 
 # Install python3 kernel
@@ -152,6 +151,21 @@ EXPOSE 6006
 # Jupyter notebook
 EXPOSE 8888
 
+# kostil
+RUN apt-get install -y --no-install-recommends libusb-1.0-0-dev \
+                                               freeglut3-dev \
+                                               default-jdk \
+                                               doxygen 
+
+
+# Build openni
+WORKDIR /tmp/build_openni
+RUN git clone https://github.com/OpenNI/OpenNI.git
+RUN cd OpenNI/Platform/Linux/CreateRedist/
+RUN chmod +x RedistMaker
+RUN python2 Redist_OpenNi.py
+RUN cd ../Redist/OpenNI-Bin-Dev-Linux-x64-v1.5.7.10/
+RUN ./install.sh
 
 # WORKDIR 
 
