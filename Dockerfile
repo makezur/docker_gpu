@@ -87,6 +87,7 @@ RUN conda install -y python=3 \
     && conda update conda \
     && conda clean --all --yes
 
+RUN ls /usr/local/cuda/
 
 
 #  ------- Pytorch -------
