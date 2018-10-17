@@ -70,6 +70,7 @@ RUN make -j4 \
     && make install \
     && make clean
 
+RUN ls /usr/local/cuda/
 ENV PATH /usr/local/cuda/bin:${PATH}
 ENV LD_LIBRARY_PATH /usr/local/nvidia/lib:/usr/local/nvidia/lib64:${LD_LIBRARY_PATH}
 
@@ -85,8 +86,6 @@ ENV PATH /opt/conda/bin:$PATH
 
 RUN conda install -y python=3 \
     && conda update conda \
-    && apt-get -qq -y remove curl bzip2 \
-    && rm -rf /var/lib/apt/lists/* /var/log/dpkg.log \
     && conda clean --all --yes
 
 
