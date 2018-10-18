@@ -165,10 +165,9 @@ RUN apt-get update && apt-get install -y --no-install-recommends libusb-1.0-0-de
 # Build openni
 WORKDIR /tmp/build_openni
 RUN git clone https://github.com/OpenNI/OpenNI.git
-RUN cd OpenNI/Platform/Linux/CreateRedist/
-RUN ls ./
+WORKDIR /tmp/build_openni/OpenNI/Platform/Linux/CreateRedist/
 RUN python2 Redist_OpenNi.py
-RUN cd ../Redist/OpenNI-Bin-Dev-Linux-x64-v1.5.7.10/
+WORKDIR /tmp/build_openni/OpenNI/Platform/Linux/Redist/OpenNI-Bin-Dev-Linux-x64-v1.5.7.10/
 RUN ./install.sh
 
 # WORKDIR 
