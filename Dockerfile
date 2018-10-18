@@ -170,6 +170,6 @@ RUN python2 Redist_OpenNi.py
 WORKDIR /tmp/build_openni/OpenNI/Platform/Linux/Redist/OpenNI-Bin-Dev-Linux-x64-v1.5.7.10/
 RUN ./install.sh
 
-# WORKDIR 
+WORKDIR /home/root/
 
 CMD ["bash"]
