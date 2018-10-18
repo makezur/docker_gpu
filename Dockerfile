@@ -66,6 +66,7 @@ RUN cmake -D CMAKE_BUILD_TYPE=RELEASE \
     -D INSTALL_PYTHON_EXAMPLES=OFF \
     -D BUILD_EXAMPLES=OFF ..
 
+
 RUN make -j4 \
     && make install \
     && make clean
@@ -152,10 +153,13 @@ EXPOSE 6006
 EXPOSE 8888
 
 # kostil
-RUN apt-get install -y --no-install-recommends libusb-1.0-0-dev \
-                                               freeglut3-dev \
-                                               default-jdk \
-                                               doxygen 
+RUN apt-get update && apt-get install -y --no-install-recommends libusb-1.0-0-dev \
+                                                                 freeglut3-dev \
+                                                                 default-jdk \
+                                                                 doxygen  \    
+                                                                 && \
+                                                                apt-get clean && \
+                                                                rm -rf /var/lib/apt/lists/*
 
 
 # Build openni
