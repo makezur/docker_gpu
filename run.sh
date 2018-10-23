@@ -7,7 +7,6 @@ $DOCKER_BINARY run -i -t -d --rm \
                -p 8000:8888 -p 6006:6006 \
                --network=host \
                -e DISPLAY=$DISPLAY \
-            #    -v /tmp/.X11-unix:/tmp/.X11-unix \
                --volume $XAUTH:/root/.Xauthority \
                --name $DOCKER_NAME \
                $DOCKER_NAME
