@@ -6,6 +6,8 @@ DOCKER_BINARY=nvidia-docker
 $DOCKER_BINARY run -i -t -d --rm \
                -v $WORKDIR_PATH:/playground/ \
                -p 8000:8888 -p 6006:6006 \
+               e DISPLAY=$DISPLAY \
+               -v /tmp/.X11-unix:/tmp/.X11-unix \
                --name $DOCKER_NAME \
                $DOCKER_NAME
 

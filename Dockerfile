@@ -44,6 +44,10 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         pkg-config \
         libvtk5-dev \
         x11-apps \
+        libusb-1.0-0-dev \
+        freeglut3-dev \
+        default-jdk \
+        doxygen \
         && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
@@ -152,14 +156,14 @@ EXPOSE 6006
 # Jupyter notebook
 EXPOSE 8888
 
-# kostil
-RUN apt-get update && apt-get install -y --no-install-recommends libusb-1.0-0-dev \
-                                                                 freeglut3-dev \
-                                                                 default-jdk \
-                                                                 doxygen  \    
-                                                                 && \
-                                                                 apt-get clean && \
-                                                                 rm -rf /var/lib/apt/lists/*
+# # kostil
+# RUN apt-get update && apt-get install -y --no-install-recommends libusb-1.0-0-dev \
+#                                                                  freeglut3-dev \
+#                                                                  default-jdk \
+#                                                                  doxygen  \    
+#                                                                  && \
+#                                                                  apt-get clean && \
+#                                                                  rm -rf /var/lib/apt/lists/*
 
 
 # Build openni
