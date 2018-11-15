@@ -54,7 +54,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         freeglut3-dev \
         default-jdk \
         doxygen \
-        nodejs \\
+        nodejs \
+        libglfw3 \
         && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
