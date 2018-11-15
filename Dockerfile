@@ -55,7 +55,14 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         default-jdk \
         doxygen \
         nodejs \
-        libglfw3 \
+        # libglfw3 \
+        libglew-dev \
+        # libglfw3-dev \
+        libjsoncpp-dev \
+        libeigen3-dev \
+        libpng16-dev \
+        libjpeg-dev \
+        libosmesa6-dev \
         && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
@@ -99,9 +106,11 @@ RUN curl -sSL https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64
 
 ENV PATH /opt/conda/bin:$PATH
 
-RUN conda install -y python=3 \
+RUN conda install -y python=3.6 \
     && conda update conda \
     && conda clean --all --yes
+
+RUN conda install -c open3d-admin open3d 
 
 # RUN ls /usr/local/cuda/
 
@@ -147,15 +156,15 @@ RUN conda install \
 # ------ Jupyter ------
 
 # Install python3 kernel
-RUN python -m ipykernel.kernelspec
+# RUN python -m ipykernel.kernelspec
 
 # Setup extensions
-RUN jupyter nbextension enable --py --sys-prefix widgetsnbextension
+# RUN jupyter nbextension enable --py --sys-prefix widgetsnbextension
 
 # Set up notebook config
-COPY ./build_sources/jupyter_notebook_config.py /root/.jupyter/
-COPY ./build_sources/run_jupyter.sh /
-RUN chmod +x /run_jupyter.sh
+# COPY ./build_sources/jupyter_notebook_config.py /root/.jupyter/
+# COPY ./build_sources/run_jupyter.sh /
+# RUN chmod +x /run_jupyter.sh
 
 
 # ------ Docker setup ------
@@ -176,11 +185,14 @@ WORKDIR /tmp/build_openni/OpenNI/Platform/Linux/Redist/OpenNI-Bin-Dev-Linux-x64-
 RUN ./install.sh
 
 # Build open3d
-WORKDIR /tmp/build_open3d
-RUN git clone https://github.com/IntelVCL/Open3D
-WORKDIR /tmp/build_open3d/build
-RUN cmake ../Open3D/
-RUN make -j && make install-pip-package
+# WORKDIR /tmp/build_open3d
+# RUN git clone https://github.com/IntelVCL/Open3D
+# WORKDIR /tmp/build_open3d/build
+# RUN cmake -DENABLE_HEADLESS_RENDERING=ON \
+#           -DBUILD_GLEW=ON \
+#           -DBUILD_GLFW=ON  ../Open3D
+
+# RUN make -j && make install-pip-package
 
 WORKDIR /home/root/
 
