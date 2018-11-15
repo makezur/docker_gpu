@@ -6,6 +6,12 @@ ARG opencv_version=3.4.1
 # ARG torch_verion=1.0
 # ------ System packages ------
 
+ENV LANG en_US.UTF-8
+ENV LC_CTYPE en_US.UTF-8
+
+
+RUN curl -sL https://deb.nodesource.com/setup_8.x | sudo bash -
+
 RUN apt-get update && apt-get install -y --no-install-recommends \
         build-essential \
         cmake \
@@ -48,10 +54,14 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         freeglut3-dev \
         default-jdk \
         doxygen \
+        nodejs \\
         && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
+RUN npm install npm@latest -g
+
+# custom opencv build
 
 WORKDIR /opt
 RUN wget -O opencv.zip https://github.com/opencv/opencv/archive/${opencv_version}.zip \
@@ -92,8 +102,7 @@ RUN conda install -y python=3 \
     && conda update conda \
     && conda clean --all --yes
 
-RUN ls /usr/local/cuda/
-
+# RUN ls /usr/local/cuda/
 
 #  ------- Pytorch -------
 RUN conda install pytorch torchvision -c pytorch
@@ -156,15 +165,6 @@ EXPOSE 6006
 # Jupyter notebook
 EXPOSE 8888
 
-# # kostil
-# RUN apt-get update && apt-get install -y --no-install-recommends libusb-1.0-0-dev \
-#                                                                  freeglut3-dev \
-#                                                                  default-jdk \
-#                                                                  doxygen  \    
-#                                                                  && \
-#                                                                  apt-get clean && \
-#                                                                  rm -rf /var/lib/apt/lists/*
-
 
 # Build openni
 WORKDIR /tmp/build_openni
@@ -173,6 +173,13 @@ WORKDIR /tmp/build_openni/OpenNI/Platform/Linux/CreateRedist/
 RUN python2 Redist_OpenNi.py
 WORKDIR /tmp/build_openni/OpenNI/Platform/Linux/Redist/OpenNI-Bin-Dev-Linux-x64-v1.5.7.10/
 RUN ./install.sh
+
+# Build open3d
+WORKDIR /tmp/build_open3d
+RUN git clone https://github.com/IntelVCL/Open3D
+WORKDIR /tmp/build_open3d/build
+RUN cmake ../Open3D/
+RUN make -j && make install-pip-package
 
 WORKDIR /home/root/
 
